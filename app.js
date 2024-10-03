@@ -12,3 +12,78 @@ const app = new App({
 
   console.log('⚡️ Bolt app is running!');
 })();
+
+app.message('hello', async ({ message, say }) => {
+    await say(`Hey there <@{message.user}>!`);
+  });
+
+app.message('events', async ({ message, say }) => {
+    await say({
+        blocks: [
+            {
+                type: 'section',
+                text: {
+                    type: 'mrkdwn',
+                    text: 'Click any of the buttons'
+                },
+                accessory: {
+                    type: 'button',
+                    text: {
+                        type: 'plain_text',
+                        text: 'Add event'
+                    },
+                    action_id: 'add_event_button'
+                }
+            }
+        ]
+    })
+});
+
+app.action('add_event_button', async ({ body, ack, client}) => {
+    await ack();
+
+    await client.views.open({
+        trigger_id: body.trigger_id,
+        view: {
+            type: 'modal',
+            callback_id: 'modal-identifier',
+            title: {
+                type: 'plain_text',
+                text: 'Add event'
+            },
+            blocks: [
+                {
+                    type: 'input',
+                    block_id: 'input_name',
+                    label: {
+                        type: 'plain_text',
+                        text: 'Enter the name of the event'
+                    },
+                    element: {
+                        type: 'plain_text_input',
+                        action_id: 'input_a'
+                    }
+                }
+            ],
+            submit: {
+                type: 'plain_text',
+                text: 'Submit'
+            }
+        }
+    });
+});
+
+app.view('modal-identifier', async ({ ack, body, view, client }) => {
+    // Acknowledge the view_submission event
+    await ack();
+  
+    // Do something with the input data
+    const userInput = view.state.values.input_c.input_a.value;
+    console.log(userInput);
+  
+    // Respond to the user
+    await client.chat.postMessage({
+      channel: body.user.id,
+      text: `You entered: ${userInput}`
+    });
+  });
