@@ -17,7 +17,11 @@ app.message('hello', async ({ message, say }) => {
     await say(`Hey there <@{message.user}>!`);
   });
 
-app.message('events', async ({ message, say }) => {
+app.message('events', async ({ message, say, ack }) => {
+    // Acknowledge the event first
+    await ack();
+
+    // Then send the response
     await say({
         blocks: [
             {
@@ -36,7 +40,7 @@ app.message('events', async ({ message, say }) => {
                 }
             }
         ]
-    })
+    });
 });
 
 app.action('add_event_button', async ({ body, ack, client}) => {
