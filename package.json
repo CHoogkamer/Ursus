@@ -1,0 +1,22 @@
+{
+  "name": "ursus",
+  "version": "1.0.0",
+  "description": "Slackbot om te registreren voor evenementen",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHoogkamer/Ursus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CHoogkamer/Ursus/issues"
+  },
+  "homepage": "https://github.com/CHoogkamer/Ursus#readme",
+  "dependencies": {
+    "@slack/bolt": "^3.22.0"
+  }
+}
