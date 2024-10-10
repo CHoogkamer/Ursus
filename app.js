@@ -15,7 +15,7 @@ const app = new App({
 
 app.command('/hello', async ({ command, ack, respond }) => {
     await ack();
-    await respond(`Hey there <@${command.user_name}>!`);
+    await respond(`Hey there ${command.user_name}!`);
 });
 
 app.command('/test', async ({ command, ack, respond }) => {
