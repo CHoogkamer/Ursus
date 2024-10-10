@@ -17,6 +17,12 @@ app.message('hello', async ({ message, say }) => {
   await say(`Hey there <@${message.user}>!`);
 });
 
+app.command('/test', async ({ command, ack, respond }) => {
+  await ack();
+
+  await respond(`Dit is de reactie op je slash command, ${command.user_name}!`);
+});
+
 app.message('events', async ({ message, say, ack }) => {
     // Acknowledge the event first
     await ack();
