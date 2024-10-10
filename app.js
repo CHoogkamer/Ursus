@@ -14,8 +14,8 @@ const app = new App({
 })();
 
 app.message('hello', async ({ message, say }) => {
-    await say(`Hey there <@{message.user}>!`);
-  });
+  await say(`Hey there <@${message.user}>!`);
+});
 
 app.message('events', async ({ message, say, ack }) => {
     // Acknowledge the event first
