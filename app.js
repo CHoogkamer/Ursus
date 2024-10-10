@@ -13,8 +13,9 @@ const app = new App({
   console.log('⚡️ Bolt app is running!');
 })();
 
-app.message('/hello', async ({ message, say }) => {
-  await say(`Hey there <@${message.user}>!`);
+app.message('/hello', async ({ message, ack, respond }) => {
+    await ack();
+    await respond(`Hey there <@${message.user}>!`);
 });
 
 app.command('/test', async ({ command, ack, respond }) => {
