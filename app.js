@@ -13,27 +13,81 @@ const app = new App({
   console.log('⚡️ Bolt app is running!');
 })();
 
-app.message('/hello', async ({ message, say }) => {
+app.message('/hello', async ({ ack, body, client, logger }) => {
     //await say(`Hello, <@${message.user}>`);
-    await say({
-        blocks: [
-            {
-                type: 'section',
-                text: {
-                    type: 'mrkdwn',
-                    text: 'Click any of the buttons'
+    // await say({
+    //     blocks: [
+    //         {
+    //             type: 'section',
+    //             text: {
+    //                 type: 'mrkdwn',
+    //                 text: 'Click any of the buttons'
+    //             },
+    //             accessory: {
+    //                 type: 'button',
+    //                 text: {
+    //                     type: 'plain_text',
+    //                     text: 'Add event'
+    //                 },
+    //                 action_id: 'add_event_button'
+    //             }
+    //         }
+    //     ]
+    // });
+
+    await ack();
+
+    try {
+        const result = await client.views.open({
+            trigger_id: body.trigger_id,
+            view: {
+                type: 'modal',
+                callback_id: 'view_1',
+                title: {
+                    type: 'plain_text',
+                    text: 'Modal title',
                 },
-                accessory: {
-                    type: 'button',
-                    text: {
-                        type: 'plain_text',
-                        text: 'Add event'
-                    },
-                    action_id: 'add_event_button'
-                }
+                blocks: [
+                    {
+                        type: 'section',
+                        text: {
+                          type: 'mrkdwn',
+                          text: 'Welcome to a modal with _blocks_'
+                        },
+                        accessory: {
+                          type: 'button',
+                          text: {
+                            type: 'plain_text',
+                            text: 'Click me!'
+                          },
+                          action_id: 'button_abc'
+                        }
+                      },
+                      {
+                        type: 'input',
+                        block_id: 'input_c',
+                        label: {
+                          type: 'plain_text',
+                          text: 'What are your hopes and dreams?'
+                        },
+                        element: {
+                          type: 'plain_text_input',
+                          action_id: 'dreamy_input',
+                          multiline: true
+                        }
+                      }
+                ],
+                submit: {
+                    type: 'plain_text',
+                    text: 'Submit'
+                  }
             }
-        ]
-    });
+        });
+        logger.info(result);
+    }
+    catch(error) {
+        logger.error(error);
+    }
 });
 
 // app.command('/hello', async ({ command, ack, say }) => {
