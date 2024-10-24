@@ -13,10 +13,16 @@ const app = new App({
   console.log('⚡️ Bolt app is running!');
 })();
 
-app.command('/hello', async ({ command, ack, say }) => {
-    await ack();
-    await say(`Hey there ${command.user_name}!`);
+app.message('/hello', async ({ message, say }) => {
+    await say(`Hello, <@${message.user}>`);
+
+    await say(`This message is type: <@${message.subtype}>`);
 });
+
+// app.command('/hello', async ({ command, ack, say }) => {
+//     await ack();
+//     await say(`Hey there ${command.user_name}!`);
+// });
 
 app.command('/test', async ({ command, ack, respond }) => {
   await ack();
