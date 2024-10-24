@@ -13,7 +13,7 @@ const app = new App({
   console.log('⚡️ Bolt app is running!');
 })();
 
-app.command('/hello', async ({ ack, body, client, logger }) => {
+app.command('/aanmaken-evenement', async ({ ack, body, client, logger }) => {
     //await say(`Hello, <@${message.user}>`);
     // await say({
     //     blocks: [
@@ -45,37 +45,56 @@ app.command('/hello', async ({ ack, body, client, logger }) => {
                 callback_id: 'view_1',
                 title: {
                     type: 'plain_text',
-                    text: 'Modal title',
+                    text: 'Aanmaken evenement',
                 },
                 blocks: [
                     {
                         type: 'section',
                         text: {
                           type: 'mrkdwn',
-                          text: 'Welcome to a modal with _blocks_'
+                          text: 'Gebruik dit om jouw evenement aan te maken!'
                         },
-                        accessory: {
-                          type: 'button',
-                          text: {
-                            type: 'plain_text',
-                            text: 'Click me!'
-                          },
-                          action_id: 'button_abc'
-                        }
                       },
                       {
                         type: 'input',
-                        block_id: 'input_c',
+                        block_id: 'titel-input',
                         label: {
                           type: 'plain_text',
-                          text: 'What are your hopes and dreams?'
+                          text: 'Titel'
                         },
                         element: {
                           type: 'plain_text_input',
-                          action_id: 'dreamy_input',
-                          multiline: true
+                          action_id: 'titel',
+                          multiline: false
                         }
-                      }
+                      },
+                      
+                      {
+                        type: 'input',
+                        block_id: 'beschrijving-input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Beschrijving'
+                        },
+                        element: {
+                            type: 'plain_text_input',
+                            action_id: 'beschrijving',
+                            multiline: true
+                        }
+                      },
+
+                      {
+                        type: 'input',
+                        block_id: 'date-input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Datum'
+                        },
+                        element: {
+                            type: 'datetimepicker',
+                            action_id: 'datum'
+                        }
+                      },
                 ],
                 submit: {
                     type: 'plain_text',
