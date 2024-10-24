@@ -95,6 +95,31 @@ app.command('/aanmaken-evenement', async ({ ack, body, client, logger }) => {
                             action_id: 'datum'
                         }
                       },
+
+                      {
+                        type: 'input',
+                        block_id: 'locatie-input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Locatie'
+                        },
+                        element: {
+                            type: 'plain_text_input',
+                            action_id: 'locatie'
+                        }
+                      },
+                      {
+                        type: 'input',
+                        block_id: 'aanmelddatumeind-input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Aanmeld datum eind'
+                        },
+                        element: {
+                            type: 'datetimepicker',
+                            action_id: 'aanmelddatumeind'
+                        }
+                      }
                 ],
                 submit: {
                     type: 'plain_text',
