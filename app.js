@@ -105,7 +105,8 @@ app.command('/aanmaken-evenement', async ({ ack, body, client, logger }) => {
                         },
                         element: {
                             type: 'plain_text_input',
-                            action_id: 'locatie'
+                            action_id: 'locatie',
+                            multiline: false
                         }
                       },
                       {
