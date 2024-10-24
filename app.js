@@ -13,7 +13,7 @@ const app = new App({
   console.log('⚡️ Bolt app is running!');
 })();
 
-app.message('/hello', async ({ ack, body, client, logger }) => {
+app.command('/hello', async ({ ack, body, client, logger }) => {
     //await say(`Hello, <@${message.user}>`);
     // await say({
     //     blocks: [
