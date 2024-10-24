@@ -14,9 +14,26 @@ const app = new App({
 })();
 
 app.message('/hello', async ({ message, say }) => {
-    await say(`Hello, <@${message.user}>`);
-
-    await say(`This message is type: <@${message.subtype}>`);
+    //await say(`Hello, <@${message.user}>`);
+    await say({
+        blocks: [
+            {
+                type: 'section',
+                text: {
+                    type: 'mrkdwn',
+                    text: 'Click any of the buttons'
+                },
+                accessory: {
+                    type: 'button',
+                    text: {
+                        type: 'plain_text',
+                        text: 'Add event'
+                    },
+                    action_id: 'add_event_button'
+                }
+            }
+        ]
+    });
 });
 
 // app.command('/hello', async ({ command, ack, say }) => {
