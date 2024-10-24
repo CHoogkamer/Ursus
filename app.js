@@ -15,7 +15,7 @@ const app = new App({
 
 app.command('/hello', async ({ command, ack, say }) => {
     await ack();
-    await say(`Hey there ${command.name}!`);
+    await say(`Hey there ${command.user_name}!`);
 });
 
 app.command('/test', async ({ command, ack, respond }) => {
@@ -24,12 +24,12 @@ app.command('/test', async ({ command, ack, respond }) => {
   await respond(`Dit is de reactie op je slash command, ${command.user_name}!`);
 });
 
-app.message('/events', async ({ message, say, ack }) => {
+app.message('/events', async ({ message, say, ack, respond }) => {
     // Acknowledge the event first
     await ack();
 
     // Then send the response
-    await say({
+    await respond({
         blocks: [
             {
                 type: 'section',
